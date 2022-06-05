@@ -11,7 +11,7 @@ const CategoriesScreen: React.FC<Props> = ({ navigation }: any) => {
 	const renderItem: ListRenderItem<ICategory> = ({ item }) => {
 		const pressHandler = () => {
 			navigation.navigate("meals-overview", {
-				yo: "Yoes!",
+				item: item,
 			})
 		}
 

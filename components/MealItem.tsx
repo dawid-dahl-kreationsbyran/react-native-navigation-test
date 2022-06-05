@@ -1,29 +1,38 @@
 import { Platform, Pressable, StyleSheet, Text, View } from "react-native"
 import React from "react"
-import { ICategory } from "../models/category"
+import Meal from "../models/meal"
+import { useNavigation } from "@react-navigation/core"
 
-type Props = ICategory & { onPress?: () => void }
+type Props = {
+	item: Meal
+}
 
-const CategoryTile: React.FC<Props> = ({ id, title, color, onPress }) => {
+const onPress = (navigation: any, item: any) => () => {
+	navigation.navigate("meals-detail", item)
+}
+
+const MealItem: React.FC<Props> = ({ item }: any) => {
+	const navigation = useNavigation()
+
 	return (
-		<View style={[styles.outerContainer, { backgroundColor: color }]}>
+		<View style={[styles.outerContainer, { backgroundColor: "red" }]}>
 			<Pressable
 				android_ripple={{ color: "white" }}
 				style={({ pressed }) => [
 					styles.button,
 					pressed ? styles.buttonPressed : null,
 				]}
-				onPress={onPress}
+				onPress={onPress(navigation, item.item)}
 			>
 				<View style={styles.innerContainer}>
-					<Text style={styles.text}>{title}</Text>
+					<Text style={styles.text}>{item.item.title}</Text>
 				</View>
 			</Pressable>
 		</View>
 	)
 }
 
-export default CategoryTile
+export default MealItem
 
 const styles = StyleSheet.create({
 	outerContainer: {
