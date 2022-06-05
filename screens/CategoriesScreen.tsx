@@ -10,7 +10,9 @@ type Props = {}
 const CategoriesScreen: React.FC<Props> = ({ navigation }: any) => {
 	const renderItem: ListRenderItem<ICategory> = ({ item }) => {
 		const pressHandler = () => {
-			navigation.navigate("meals-overview")
+			navigation.navigate("meals-overview", {
+				yo: "Yoes!",
+			})
 		}
 
 		return (

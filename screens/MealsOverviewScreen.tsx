@@ -4,7 +4,8 @@ import React from "react"
 
 type Props = {}
 
-const MealsOverviewScreen: React.FC<Props> = () => {
+const MealsOverviewScreen: React.FC<Props> = ({ route }: any) => {
+	console.log(route.params.yo)
 	return (
 		<View style={styles.container}>
 			<Text>MealsOverviewScreen</Text>
