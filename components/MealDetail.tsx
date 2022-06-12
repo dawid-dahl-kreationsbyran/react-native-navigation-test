@@ -1,7 +1,5 @@
 import { Platform, ScrollView, StyleSheet, Text, View } from "react-native"
 import React from "react"
-import Meal from "../models/meal"
-import { useNavigation } from "@react-navigation/core"
 
 type Props = {
 	meal: any

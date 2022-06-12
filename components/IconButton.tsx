@@ -1,17 +1,25 @@
-import { Pressable, StyleSheet, View } from "react-native"
+import {
+	GestureResponderEvent,
+	Pressable,
+	StyleSheet,
+	View,
+} from "react-native"
 import React from "react"
 import { Ionicons } from "@expo/vector-icons"
 
-type Props = {}
+type Props = {
+	pressHandler: (event: GestureResponderEvent) => void
+	icon: "star" | "star-outline"
+}
 
-const IconButton: React.FC<Props> = ({}: any) => {
+const IconButton: React.FC<Props> = ({ pressHandler, icon }) => {
 	return (
 		<View>
 			<Pressable
 				style={({ pressed }) => pressed && styles.pressable}
-				onPress={() => console.log("Icon pressed!")}
+				onPress={pressHandler}
 			>
-				<Ionicons name="star" color="white" size={24} />
+				<Ionicons name={icon} color="white" size={24} />
 			</Pressable>
 		</View>
 	)

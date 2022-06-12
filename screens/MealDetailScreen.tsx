@@ -1,12 +1,37 @@
 import { Platform, StyleSheet, Text, View } from "react-native"
-import React from "react"
-import { ICategory } from "../models/category"
-import Meal from "../models/meal"
+import React, { useLayoutEffect } from "react"
 import MealDetail from "../components/MealDetail"
+import IconButton from "../components/IconButton"
+import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks"
+import { addFavourites, removeFavourites } from "../store/favourites"
 
 type Props = {}
 
-const MealDetailScreen: React.FC<Props> = ({ route }: any) => {
+const MealDetailScreen: React.FC<Props> = ({ route, navigation }: any) => {
+	const favoriteMealIds = useAppSelector(state => state.favouritesReducer.ids)
+	const dispatch = useAppDispatch()
+
+	const isMealFavourite = favoriteMealIds.includes(route.params.id)
+
+	const handleFavouritesPress = () => {
+		if (isMealFavourite) {
+			dispatch(removeFavourites({ id: route.params.id }))
+		} else {
+			dispatch(addFavourites({ id: route.params.id }))
+		}
+	}
+
+	useLayoutEffect(() => {
+		navigation.setOptions({
+			headerRight: () => (
+				<IconButton
+					icon={isMealFavourite ? "star" : "star-outline"}
+					pressHandler={handleFavouritesPress}
+				/>
+			),
+		})
+	})
+
 	return <MealDetail meal={route.params} />
 }
 

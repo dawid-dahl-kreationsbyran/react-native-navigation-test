@@ -1,8 +1,7 @@
-import { FlatList, ListRenderItem, StyleSheet, Text, View } from "react-native"
+import { StyleSheet, View } from "react-native"
 import { MEALS } from "../data/dummy-data"
 import React from "react"
-import MealItem from "../components/MealItem"
-import Meal from "../models/meal"
+import MealsList from "../components/MealsList/MealsList"
 
 type Props = {}
 
@@ -13,18 +12,9 @@ const MealsOverviewScreen: React.FC<Props> = ({ route }: any) => {
 		meal.categoryIds.includes(categoryId)
 	)
 
-	const renderMealItem = (itemData: any) => {
-		return <MealItem item={itemData} />
-	}
-
 	return (
 		<View style={styles.container}>
-			<Text>MealsOverviewScreen</Text>
-			<FlatList
-				data={mealsInCategory}
-				keyExtractor={meal => meal.id}
-				renderItem={renderMealItem}
-			/>
+			<MealsList title={"Meals overview!"} meals={mealsInCategory} />
 		</View>
 	)
 }
